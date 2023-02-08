@@ -1,0 +1,17 @@
+.catImg img{
+    height: 10vw;
+    padding: 10%;
+}
+.catImg{
+    height: 10vw;
+}
+.card{
+    width: 20%;
+    transition-duration: 200ms;
+    
+}
+.card:hover{
+    background-color: rgb(245, 245, 245);
+    transform: scale(1.1);
+    transition-duration: 200ms;
+}
