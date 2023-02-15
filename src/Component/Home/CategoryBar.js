@@ -1,6 +1,6 @@
 import React,{Component} from "react";
 import './CategoryBar.css'
-const catUrl = "http://localhost:7700/category"
+const catUrl = "https://winkart.onrender.com/category"
 
 
 class CategoryBar extends Component{

@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import './SubCat.css'
 
-const mobileUrl = "http://localhost:7700/catProd/1";
-const electUrl = "http://localhost:7700/catProd/2";
-const fasUrl = "http://localhost:7700/catProd/3";
-const applUrl = "http://localhost:7700/catProd/4";
-const beautyUrl = "http://localhost:7700/catProd/5";
+const mobileUrl = "https://winkart.onrender.com/catProd/1";
+const electUrl = "https://winkart.onrender.com/catProd/2";
+const fasUrl = "https://winkart.onrender.com/catProd/3";
+const applUrl = "https://winkart.onrender.com/catProd/4";
+const beautyUrl = "https://winkart.onrender.com/catProd/5";
 
 
 

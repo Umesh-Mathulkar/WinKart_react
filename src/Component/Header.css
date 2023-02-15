@@ -22,6 +22,11 @@ nav{
 .navbar-brand{
     font-size: 30px;
 }
+.navbar-brand p{
+    font-size: 7px;
+    margin: 0px 0px;
+
+}
 .fa-face-smile-wink{
     font-size: 30px;
     color: white;
