@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/WinKart_react/static/css/main.0f598f84.css",
+    "main.js": "/WinKart_react/static/js/main.ff4f1390.js",
+    "static/media/screenshot-2021-10-08-123645.jpg": "/WinKart_react/static/media/screenshot-2021-10-08-123645.c92b810e07cfc8241b08.jpg",
+    "static/media/flipkart-big-savings-days-sale-offers-discounts-and-offers-1592561708.jpg": "/WinKart_react/static/media/flipkart-big-savings-days-sale-offers-discounts-and-offers-1592561708.845e24df39cd794b56af.jpg",
+    "index.html": "/WinKart_react/index.html",
+    "main.0f598f84.css.map": "/WinKart_react/static/css/main.0f598f84.css.map",
+    "main.ff4f1390.js.map": "/WinKart_react/static/js/main.ff4f1390.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0f598f84.css",
+    "static/js/main.ff4f1390.js"
+  ]
+}
