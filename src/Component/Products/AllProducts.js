@@ -20,9 +20,9 @@ const AllProducts=()=>{
     })
 
 
-    const allproductHead = (productslist) => {
+    const allproductHead = (allProdlist) => {
         if (allProdlist) {
-            return allProdlist[0]['category_name']
+            return allProdlist[0]['subCat_name']
         }
 
     }

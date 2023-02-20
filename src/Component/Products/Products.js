@@ -43,7 +43,7 @@ const Products = () => {
             <div className='proListMain'>
                 <ProductsDisplay ProList={productslist}  />
             </div>
-
+        
         </div>
     )
 }

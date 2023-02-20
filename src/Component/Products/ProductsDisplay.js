@@ -9,7 +9,7 @@ const ProductsDisplay = (props) => {
         if (ProList) {
             return ProList.map((item) => {
                 return (
-                    <Link to={'/details'}>
+                    <Link to={`/details/${item.product_id}`}>
                            <div className="container ProMain">
                         <div className="row">
                             <div className="ProDisImg col-lg-4 d-flex justify-content-center align-items-center">

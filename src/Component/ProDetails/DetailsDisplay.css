@@ -1,0 +1,16 @@
+.detailsImg img{
+    width: 80%;
+    padding: 5%;
+}
+
+.detailsImg{
+    border: 1px solid rgb(209, 209, 209);
+   
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px grey;
+    display: flex;
+    justify-content: center;
+}
+.detailsMain{
+    margin: 5% 0;
+}
