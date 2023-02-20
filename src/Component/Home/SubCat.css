@@ -20,6 +20,9 @@
     border-radius: 10px;
     background-color: white;
 }
+.cards h6{
+    color: rgb(85, 85, 85);
+}
 .subHead{
     height: 100%;
    
@@ -31,9 +34,13 @@
     align-items: center;
     border-radius: 8px;
     padding: 2%;
+    
 }
 .rows:hover{
     background-color: rgb(243, 243, 243);
+}
+.proAlign{
+    display: inline-block;
 }
 
 

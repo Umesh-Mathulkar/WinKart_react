@@ -1,5 +1,6 @@
 import React,{Component} from "react";
 import './CategoryBar.css'
+import  {Link} from "react-router-dom"
 const catUrl = "https://winkart.onrender.com/category"
 
 
@@ -18,11 +19,11 @@ class CategoryBar extends Component{
         if(data){
             return data.map((item)=>{
                 return(
-                    <div className="card">
+                   <Link to={`/allProd/${item.category_id}`}> <div className="cardHome">
                         <div className="catImg d-flex justify-content-center"><img src={item.image} alt='catImg' /></div>
                         <h6 className="text-center">{item.category}</h6>
                     
-                    </div>
+                    </div></Link>
                     
                 )
             })
@@ -35,7 +36,7 @@ class CategoryBar extends Component{
     render(){
         return(
             <>
-                <div className="container d-flex justify-content-center mt-3">
+                <div className="containers justify-content-center mt-3">
                   
                   {this.renderCategory(this.state.categories)}
 
