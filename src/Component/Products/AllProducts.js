@@ -6,9 +6,9 @@ import AllProductsDisplay from "./AllProductsDisp";
 const allProUrl = "https://winkart.onrender.com/catAllProd/"
 const AllProducts=()=>{
     let params = useParams();
-   
+    
     let allUrl =`${allProUrl}${params.catId}`
-   
+    sessionStorage.setItem('catId',params.catId)
     const [allProdlist, setAllPro] = useState()
 
     useEffect(()=>{

@@ -7,7 +7,7 @@ const detailsUrl = "https://winkart.onrender.com/product/"
 const Details=()=>{
     let params = useParams();
     let detailUrl = `${detailsUrl}${params.prodId}`
-
+    sessionStorage.setItem('prodId',params.prodId)
  const [Details,setDetails] = useState();
     
     useEffect(()=>{
