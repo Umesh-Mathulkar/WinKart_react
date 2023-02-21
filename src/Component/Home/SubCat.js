@@ -25,7 +25,7 @@ class SubCat extends Component {
 
     renderMobile = (data) => {
         if (data) {
-            console.log(data)
+           
             return data.map((item) => {
                 return (<div className="proAlign">
                     <Link to={`/products/${item.subCat_id}`}>

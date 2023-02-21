@@ -10,8 +10,11 @@ const subCatUrl = "https://winkart.onrender.com/subCat/"
 
 const Products = () => {
     let params = useParams();
-    let subUrl = `${subCatUrl}${params.subCatId}`
     sessionStorage.setItem('subCatId',params.subCatId);
+    const subCatId = sessionStorage.getItem('subCatId')
+    let subUrl = `${subCatUrl}${subCatId}`
+    
+
     const [productslist, setList] = useState()
   
 

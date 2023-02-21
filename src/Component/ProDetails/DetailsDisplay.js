@@ -1,13 +1,19 @@
 import React from "react";
 import './DetailsDisplay.css'
 import { useEffect, useState } from "react";
-
 import { Link } from "react-router-dom";
+
+
 const catUrl = "https://winkart.onrender.com/category"
+
+
+
 const DetailsDisplay = (props) => {
 
 
 
+
+    //  render Subtab
     const RenderTab = (subTab) => {
         if (subTab) {
             return (
@@ -31,6 +37,10 @@ const DetailsDisplay = (props) => {
         }
 
     }
+    //  render Subtab end
+
+
+    // api call for subTab
 
     const RenderSubTab = () => {
         const [subTab, setSubTab] = useState();
@@ -51,9 +61,21 @@ const DetailsDisplay = (props) => {
             </div>
         )
     }
+    // api call for subTan end
 
+    // add to cart
+    const orderId=[];
+    const toCart=(id)=>{
+    
+        orderId.push(id)
+       console.log(orderId)
+    }
+   
+    // add to cart end
 
+    
 
+    // main details Render
     const renderDetails = ({ passDetails }) => {
         if (passDetails) {
             return (
@@ -68,7 +90,7 @@ const DetailsDisplay = (props) => {
                                 <h2 className="mt-3">{passDetails[0]['product_name']}</h2>
                                 <p>{passDetails[0]['description']}</p>
                                 <h4>Just Rs. {passDetails[0]['Price']}</h4>
-                                <button className="btn btn-success mt-4">Buy Now {passDetails[0]['company']} {passDetails[0]['subCat_name']}</button>
+                                <button onClick={()=>{toCart(passDetails[0]['product_id'])}} className="btn btn-success mt-4">Buy Now {passDetails[0]['company']} {passDetails[0]['subCat_name']}</button>
                             </div>
                         </div>
                     </div>
@@ -77,8 +99,9 @@ const DetailsDisplay = (props) => {
             )
         }
     }
+    // main details Render end
 
-
+// return function
     return (
         <div>
             {RenderSubTab()}
