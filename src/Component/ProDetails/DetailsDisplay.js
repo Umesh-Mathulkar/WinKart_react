@@ -2,6 +2,9 @@ import React from "react";
 import './DetailsDisplay.css'
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatchCart, useCart } from "../ContextReducer";
+
+
 
 
 const catUrl = "https://winkart.onrender.com/category"
@@ -9,12 +12,29 @@ const catUrl = "https://winkart.onrender.com/category"
 
 
 const DetailsDisplay = (props) => {
+    const[qty,setQty]=useState(1);
+    
+    let dispatch = useDispatchCart();
+    let orderData = useCart();
+
+
+    const handleAddToCart = async (arrays) => {
+       
+        await dispatch({ type: "ADD", id: arrays.product_id, name: arrays.product_name, price: arrays.Price, image: arrays.image, Qty:qty })
+
+        document.getElementById("buy").innerText = ``
+        document.getElementById("buyMain").innerHTML = `<Button className="btn btn-success" disabled>added to cart</button`
+    }
+
+
+
 
 
 
 
     //  render Subtab
     const RenderTab = (subTab) => {
+
         if (subTab) {
             return (
                 <div>
@@ -50,6 +70,7 @@ const DetailsDisplay = (props) => {
                 .then((data) => {
                     setSubTab(data)
                 })
+
         })
 
         return (
@@ -57,26 +78,28 @@ const DetailsDisplay = (props) => {
                 <ul className="nav mt-2 justify-content-center">
                     {RenderTab(subTab)}
                 </ul>
-                <hr/>
+                <hr />
             </div>
         )
     }
     // api call for subTan end
 
     // add to cart
-    const orderId=[];
-    const toCart=(id)=>{
-    
-        orderId.push(id)
-       console.log(orderId)
+    const handleQty=(event)=>{
+         setQty(event.target.value)
+            
+        
     }
-   
+
+
+
     // add to cart end
 
-    
+
 
     // main details Render
     const renderDetails = ({ passDetails }) => {
+
         if (passDetails) {
             return (
                 <div className="detailsMain">
@@ -89,8 +112,27 @@ const DetailsDisplay = (props) => {
                             <div className="container detailsInfo">
                                 <h2 className="mt-3">{passDetails[0]['product_name']}</h2>
                                 <p>{passDetails[0]['description']}</p>
-                                <h4>Just Rs. {passDetails[0]['Price']}</h4>
-                                <button onClick={()=>{toCart(passDetails[0]['product_id'])}} className="btn btn-success mt-4">Buy Now {passDetails[0]['company']} {passDetails[0]['subCat_name']}</button>
+                                <h4>Just Rs. {passDetails[0]['Price'].toLocaleString()}</h4>
+                                <form>
+                                    <label style={{color:"red"}} for="qty">Please Select Quantity :</label>
+                                    <select id="qty" onChange={(e)=>{handleQty(e)}}>
+                                        
+                                        <option value={1}>1</option>
+                                        <option value={2}>2</option>
+                                        <option value={3}>3</option>
+                                        <option value={4}>4</option>
+                                        <option value={5}>5</option>
+                                        <option value={6}>6</option>
+                                        <option value={7}>7</option>
+                                        <option value={8}>8</option>
+                                        <option value={9}>9</option>
+                                        <option value={10}>10</option>
+                                        <option value={11}>11</option>
+                                        <option value={12}>12</option>
+                                        <option value={13}>13</option>
+                                    </select>
+                                    <div id="buyMain"> <button id="buy" type="submit" onClick={() => { handleAddToCart(passDetails[0]) }} className="btn btn-success mt-4">Buy Now {passDetails[0]['company']} {passDetails[0]['subCat_name']}</button></div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -101,7 +143,7 @@ const DetailsDisplay = (props) => {
     }
     // main details Render end
 
-// return function
+    // return function
     return (
         <div>
             {RenderSubTab()}

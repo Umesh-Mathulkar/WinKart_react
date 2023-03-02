@@ -22,13 +22,13 @@ class Header extends Component {
               </form>
               <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                 <Link className="nav-links" to='/login'><i className="fa fa-user-circle"></i></Link>
+                 <Link className="nav-links" to='/register'><i className="fa fa-user-circle"></i></Link>
                 </li>
                 <li className="nav-item">
                   <Link className="nav-links" to='/notification'><i className="fa fa-bell"></i></Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-links" to='/cart'><i className="fa fa-shopping-cart"></i></Link>
+                  <Link  className="nav-links" to={'/orders'}><i className="fa fa-shopping-cart"></i></Link>
                 </li>
                
               </ul>
