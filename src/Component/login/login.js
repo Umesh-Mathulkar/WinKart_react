@@ -1,79 +1,73 @@
-import React,{Component} from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+const Login = () => {
+  const [email, setEmail] = useState('rohini@gmail.com');
+  const [password, setPassword] = useState('12345678');
+  const [message, setMessage] = useState('');
 
-const url = "localhost:4500/api/auth/login"
+  const navigate = useNavigate();
 
-class Login extends Component{
+  const handleSubmit = () => {
+    const url = "https://winkart-login.onrender.com/api/auth/login";
 
-    constructor(props){
-        super(props)
-
-        this.state={
-            email:'rohini@gmail.com',
-            password:'12345678',
-            message:''
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json',
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({ email, password })
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.auth === false) {
+          setMessage(data.token);
+        } else {
+          sessionStorage.setItem('ltk', data.token);
+          sessionStorage.setItem('loginStatus', 'loggedIn');
+          navigate('/');
         }
-    }
+      })
+  }
 
-    handleChange=(event) => {
-        this.setState({[event.target.name]:event.target.value})
-    }
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  }
 
-    handleSubmit=() => {
-        fetch(url,{
-            method: 'POST',
-            headers:{
-                'accept':'application/json',
-                'content-type':'application/json'
-            },
-            body:JSON.stringify(this.state)
-        })
-        .then((res) => res.json())
-        .then((data) => {
-            if(data.auth === false){
-               this.setState({message:data.token}) 
-            }else{
-                sessionStorage.setItem('ltk',data.token)
-                sessionStorage.setItem('loginStatus','loggedIn')
-                this.props.history.push('/')
-            }
-        })
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  }
 
-    }
-
-    render(){
-        return(
-           <>
-         
-           
-            <div className="container mt-3 mb-5">
-                <div className="panel panel-success">
-                    <div className="panel-heading">
-                        <h3>Login</h3>
-                        <h2>{this.state.message}</h2>
-                    </div>
-                    <div className="panel-body">
-                        <div className="row">
-                            <div className="col-md-6 form-group">
-                                <label for="email" className='control-label'>Email</label>
-                                <input className="form-control" id="email" name="email" 
-                                value={this.state.email} onChange={this.handleChange}/>
-                            </div>
-                            <div className="col-md-6 form-group">
-                                <label for="password" className='control-label'>Password</label>
-                                <input className="form-control" id="password" name="password" 
-                                value={this.state.password} onChange={this.handleChange}/>
-                            </div>
-                        </div>
-                        <button className="btn btn-success" onClick={this.handleSubmit}>
-                            Login
-                        </button>
-                    </div>
-                </div>
+  return (
+    <>
+      <div className="container mt-3 mb-5">
+        <div className="panel panel-success">
+          <div className="panel-heading">
+            <h3>Login</h3>
+            <h2>{message}</h2>
+          </div>
+          <div className="panel-body">
+            <div className="row">
+              <div className="col-md-6 form-group">
+                <label htmlFor="email" className='control-label'>Email</label>
+                <input className="form-control" id="email" name="email"
+                  value={email} onChange={handleEmailChange} />
+              </div>
+              <div className="col-md-6 form-group">
+                <label htmlFor="password" className='control-label'>Password</label>
+                <input className="form-control" id="password" name="password"
+                  value={password} onChange={handlePasswordChange} />
+              </div>
             </div>
-           </>
-        )
-    }
+            <button className="btn btn-success" onClick={handleSubmit}>
+              Login
+            </button>
+          </div>
+        </div>
+      </div>
+    </>
+  )
 }
 
-export default Login
+export default Login;
