@@ -40,7 +40,7 @@ const DetailsDisplay = (props) => {
                 <div>
                     {subTab.map((item) => {
                         return (
-                            <div className="proAligns">
+                            <div className="proAligns" key={item._id}>
                                 <li className="nav-item">
 
                                     <Link to={`/allProd/${item.category_id}`} className="nav-link active" aria-current="page" href="#">{item.category}</Link>
@@ -52,6 +52,15 @@ const DetailsDisplay = (props) => {
 
                         )
                     })}
+                </div>
+            )
+        }
+        else {
+            return (
+                <div className="d-flex justify-content-center">
+                    <div className="spinner-border" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </div>
                 </div>
             )
         }
@@ -114,7 +123,7 @@ const DetailsDisplay = (props) => {
                                 <p>{passDetails[0]['description']}</p>
                                 <h4>Just Rs. {passDetails[0]['Price'].toLocaleString()}</h4>
                                 <form>
-                                    <label style={{color:"red"}} for="qty">Please Select Quantity :</label>
+                                    <label style={{color:"red"}} htmlFor="qty">Please Select Quantity :</label>
                                     <select id="qty" onChange={(e)=>{handleQty(e)}}>
                                         
                                         <option value={1}>1</option>
@@ -137,6 +146,15 @@ const DetailsDisplay = (props) => {
                         </div>
                     </div>
 
+                </div>
+            )
+        }
+        else {
+            return (
+                <div className="d-flex justify-content-center">
+                    <div className="spinner-grow" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </div>
                 </div>
             )
         }

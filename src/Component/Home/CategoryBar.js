@@ -1,44 +1,51 @@
-import React,{Component} from "react";
+import React, { Component } from "react";
 import './CategoryBar.css'
-import  {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 const catUrl = "https://winkart.onrender.com/category"
 
 
-class CategoryBar extends Component{
-    constructor(props){
+class CategoryBar extends Component {
+    constructor(props) {
         super(props)
 
-        this.state={
-            categories:'',
-          
+        this.state = {
+            categories: '',
+            isLoading: true
         }
 
     }
 
-    renderCategory = (data) =>{
-        if(data){
-            return data.map((item)=>{
-                return(
-                   <Link to={`/allProd/${item.category_id}`}> <div className="cardHome">
+    renderCategory = (data) => {
+        if (data) {
+            return data.map((item) => {
+                return (
+                    <Link to={`/allProd/${item.category_id}`} key={item.category_id}> <div className="cardHome">
                         <div className="catImg d-flex justify-content-center"><img src={item.image} alt='catImg' /></div>
                         <h6 className="text-center">{item.category}</h6>
-                    
+
                     </div></Link>
-                    
+
                 )
             })
         }
     }
 
- 
 
 
-    render(){
-        return(
+
+    render() {
+        return (
             <>
                 <div className="containers justify-content-center mt-3">
-                  
-                  {this.renderCategory(this.state.categories)}
+                    {this.state.isLoading ? (
+                        <div className="d-flex justify-content-center">
+                            <div className="spinner-border" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    ) : (this.renderCategory(this.state.categories)
+                    )}
+
 
                 </div>
             </>
@@ -50,12 +57,12 @@ class CategoryBar extends Component{
 
     //api calling
 
-    componentDidMount(){
-        fetch(catUrl,{method:'GET'})
-        .then((res)=>res.json())
-        .then((data)=>{
-            this.setState({categories:data})
-        })
+    componentDidMount() {
+        fetch(catUrl, { method: 'GET' })
+            .then((res) => res.json())
+            .then((data) => {
+                this.setState({ categories: data, isLoading: false })
+            })
     }
 }
 

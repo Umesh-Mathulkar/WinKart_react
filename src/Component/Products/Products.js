@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { useParams } from 'react-router-dom';
 import ProductsDisplay from './ProductsDisplay';
-
+import Nav from '../Nav';
 import './Products.css'
 const subCatUrl = "https://winkart.onrender.com/subCat/"
 
@@ -36,7 +36,7 @@ const Products = () => {
 
     }
 
-    return (
+    return (<> <Nav/>
         <div>
 
             <div className='container mt-4 mb-4'>
@@ -48,6 +48,7 @@ const Products = () => {
             </div>
         
         </div>
+        </>
     )
 }
 

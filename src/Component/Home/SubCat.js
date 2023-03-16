@@ -2,155 +2,75 @@ import React, { Component } from "react";
 import './SubCat.css'
 import { Link } from "react-router-dom"
 
-const mobileUrl = "https://winkart.onrender.com/catProd/1";
-const electUrl = "https://winkart.onrender.com/catProd/2";
-const fasUrl = "https://winkart.onrender.com/catProd/3";
-const applUrl = "https://winkart.onrender.com/catProd/4";
-const beautyUrl = "https://winkart.onrender.com/catProd/5";
-
-
+const categories = [
+    { name: "Mobiles and Accessories", url: "https://winkart.onrender.com/catProd/1" },
+    { name: "Electronics", url: "https://winkart.onrender.com/catProd/2" },
+    { name: "Appliances", url: "https://winkart.onrender.com/catProd/4" },
+    { name: "Fashion", url: "https://winkart.onrender.com/catProd/3" },
+    { name: "Beauty", url: "https://winkart.onrender.com/catProd/5" }
+];
 
 class SubCat extends Component {
     constructor(props) {
-        super(props)
-
-        this.state = {
-            mobile: '',
-            elect: '',
-            fas: '',
-            appl: '',
-            beauty: ''
-        }
+        super(props);
+        this.state = categories.reduce((state, { name }) => {
+            return { ...state, [name.toLowerCase()]: '' };
+        }, {});
     }
 
-    renderMobile = (data) => {
+    renderCategory = (name, data) => {
+        return (
+            <div className="row rows">
+                <div className="subHead col-lg-2 justify-content-center d-flex"><h4>{name}</h4></div>
+                <div className="col-lg-10">{this.renderCards(data)}</div>
+            </div>
+        );
+    }
+
+    renderCards = (data) => {
         if (data) {
-           
             return data.map((item) => {
-                return (<div className="proAlign">
-                    <Link to={`/products/${item.subCat_id}`}>
-                        <div className="cards offset-md-2">
-                            <div className="proImg d-flex justify-content-center"><img src={item.image} /></div>
-                            <h6 className="text-center">{item.subCat_name}</h6>
-                        </div>
-                    </Link>
+                return (
+                    <div className="proAlign" key={item.subCat_id}>
+                        <Link to={`/products/${item.subCat_id}`}>
+                            <div className="cards">
+                                <div className="proImg d-flex justify-content-center"><img src={item.image} /></div>
+                                <h6 className="text-center">{item.subCat_name}</h6>
+                            </div>
+                        </Link>
+                    </div>
+                );
+            });
+        } else {
+            return (
+                <div className="d-flex justify-content-center">
+                    <div className="spinner-grow" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </div>
                 </div>
-                )
-            })
+            );
         }
     }
 
-    renderElect = (data) => {
-        if (data) {
-            return data.map((item) => {
-                return (<div className="proAlign">
-                    <Link to={`/products/${item.subCat_id}`}>
-                        <div className="cards">
-                            <div className="proImg d-flex justify-content-center"><img src={item.image} /></div>
-                            <h6 className="text-center">{item.subCat_name}</h6>
-                        </div>
-                    </Link>
-                    </div>
-                )
-            })
-        }
+    componentDidMount() {
+        categories.forEach(({ name, url }) => {
+            fetch(url)
+                .then(res => res.json())
+                .then(data => this.setState({ [name.toLowerCase()]: data }));
+        });
     }
-
-    renderFas = (data) => {
-        if (data) {
-            return data.map((item) => {
-                return (<div className="proAlign">
-                    <Link to={`/products/${item.subCat_id}`}>
-                        <div className="cards">
-                            <div className="proImg d-flex justify-content-center"><img src={item.image} /></div>
-                            <h6 className="text-center">{item.subCat_name}</h6>
-                        </div>
-                    </Link>
-                    </div>
-                )
-            })
-        }
-    }
-
-    renderAppl = (data) => {
-        if (data) {
-            return data.map((item) => {
-                return (<div className="proAlign">
-                    <Link to={`/products/${item.subCat_id}`}>
-                        <div className="cards">
-                            <div className="proImg d-flex justify-content-center"><img src={item.image} /></div>
-                            <h6 className="text-center">{item.subCat_name}</h6>
-                        </div>
-                    </Link>
-                    </div>
-                )
-            })
-        }
-    }
-
-    renderBeauty = (data) => {
-        if (data) {
-            return data.map((item) => {
-                return (<div className="proAlign">
-                    <Link to={`/products/${item.subCat_id}`}>
-                        <div className="cards">
-                            <div className="proImg d-flex justify-content-center"><img src={item.image} /></div>
-                            <h6 className="text-center">{item.subCat_name}</h6>
-                        </div>
-                    </Link>
-                    </div>
-                )
-            })
-        }
-    }
-
 
     render() {
         return (
             <>
                 <div className="subCategory">
-                    <div className="row rows"><div className="subHead col-lg-2 justify-content-center d-flex"><h4>Mobiles and<br /> Accessories</h4></div><div className="col-lg-10 mx-auto"> {this.renderMobile(this.state.mobile)}</div></div>
-                    <div className="row rows"><div className="subHead col-lg-2 justify-content-center d-flex"><h4>Electronics</h4></div><div className="col-lg-10"> {this.renderElect(this.state.elect)}</div></div>
-                    <div className="row rows"><div className="subHead col-lg-2 justify-content-center d-flex"><h4>Appliances</h4></div><div className="col-lg-10"> {this.renderAppl(this.state.appl)}</div></div>
-                    <div className="row rows"><div className="subHead col-lg-2 justify-content-center d-flex"><h4>Fashion</h4></div><div className="col-lg-10"> {this.renderFas(this.state.fas)}</div></div>
-                    <div className="row rows"><div className="subHead col-lg-2 justify-content-center d-flex"><h4>Beauty & more</h4></div><div className="col-lg-10"> {this.renderBeauty(this.state.beauty)}</div></div>
+                    {categories.map(({ name }) => (
+                        this.renderCategory(name, this.state[name.toLowerCase()])
+                    ))}
                 </div>
             </>
-        )
+        );
     }
-
-    //api calling
-
-    componentDidMount() {
-        fetch(mobileUrl, { method: 'GET' })
-            .then((res) => res.json())
-            .then((data) => {
-                this.setState({ mobile: data })
-            })
-
-        fetch(electUrl, { method: 'GET' })
-            .then((res) => res.json())
-            .then((data) => {
-                this.setState({ elect: data })
-            })
-        fetch(fasUrl, { method: 'GET' })
-            .then((res) => res.json())
-            .then((data) => {
-                this.setState({ fas: data })
-            })
-        fetch(beautyUrl, { method: 'GET' })
-            .then((res) => res.json())
-            .then((data) => {
-                this.setState({ beauty: data })
-            })
-        fetch(applUrl, { method: 'GET' })
-            .then((res) => res.json())
-            .then((data) => {
-                this.setState({ appl: data })
-            })
-    }
-
-
 }
 
 export default SubCat;

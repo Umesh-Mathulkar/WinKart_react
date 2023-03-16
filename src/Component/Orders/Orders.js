@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useCart } from "../ContextReducer";
 import './Orders.css'
 import { useDispatchCart } from "../ContextReducer";
-
+import Nav from "../Nav";
 
 const Orders = () => {
     let dispatch = useDispatchCart();
@@ -54,7 +54,7 @@ const Orders = () => {
 
 
     return (
-        <>
+        <><Nav/>
             <div className="row mt-3">
                 <div className="col-lg-8"><div className="row">{renderCart()}</div></div>
                 <div className="col-lg-4 place">

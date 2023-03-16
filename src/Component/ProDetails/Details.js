@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect,useState } from "react";
 import { useParams } from "react-router-dom";
 import DetailsDisplay from "./DetailsDisplay";
+import Nav from "../Nav";
 const detailsUrl = "https://winkart.onrender.com/product/"
 
 const Details=()=>{
@@ -18,11 +19,12 @@ const Details=()=>{
         })
     },[])
 
-    return(
+    return( <><Nav/>
         <div>
            <div></div>
            <DetailsDisplay passDetails={Details}/>
         </div>
+        </>
     )
 }
 
